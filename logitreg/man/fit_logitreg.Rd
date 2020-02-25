@@ -4,12 +4,15 @@
 \alias{fit_logitreg}
 \title{Fitting logistic regresion}
 \usage{
-fit_logitreg(design, response, ...)
+fit_logitreg(design, response, coefs_init = NULL, ...)
 }
 \arguments{
 \item{design}{Numeric matrix containing the (scaled) design matrix.}
 
 \item{response}{Numeric vector containing the (scaled) response.}
+
+\item{coefs_init}{Numeric vector containing initial coefficientsfor the optimization.
+If `NULL` then the coefficients are drawn out of a uniform distribution over the intervall [-3, 3]}
 
 \item{...}{For \code{\link[stats]{optim}} : Additonal arguments for likelihood maximization procedure.}
 }

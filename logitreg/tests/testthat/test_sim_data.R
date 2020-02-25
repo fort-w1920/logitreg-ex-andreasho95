@@ -1,0 +1,16 @@
+context("Function sim_data")
+
+test_that("Returns correct output for correct input", {
+  data <- sim_data(n = 1500, numerics = 3, factors = 0, seed = NULL, dataframe = FALSE)
+  expect_true(is.list(data))
+  expect_true(length(data) == 3)
+  data2 <- sim_data(n = 1500, numerics = 8, factors = 2, seed = NULL, dataframe = FALSE)
+  expect_true(is.list(data2))
+  expect_true(length(data2) == 3)
+  expect_true(nrow(data2$design) == 1500)
+  expect_true(ncol(data2$design) == 11)
+  data3 <- sim_data(n = 1500, numerics = 8, factors = 2, seed = NULL, dataframe = TRUE)
+  expect_true(is.data.frame(data3))
+  expect_true(nrow(data3) == 1500)
+  expect_true(ncol(data3) == 11)
+})

@@ -5,16 +5,29 @@
 #'
 #' @inheritParams neg_loglik
 #' @param ... For \code{\link[stats]{optim}} : Additonal arguments for likelihood maximization procedure.
+#' @param coefs_init Numeric vector containing initial coefficientsfor the optimization.
+#' If `NULL` then the coefficients are drawn out of a uniform distribution over the intervall [-3, 3]
 #'
 #' @return A list containing the regression coefficients, the estimated probabilites P(Y = 1) and
 #' the (original) data
-fit_logitreg <- function(design, response, ...){
+fit_logitreg <- function(design, response, coefs_init = NULL, ...){
+
+  checkmate::assert_matrix(design, mode = "numeric", any.missing = FALSE, min.rows = 1, min.cols = 1)
+  checkmate::assert_numeric(response, finite = TRUE, any.missing = FALSE, len = nrow(design))
+  checkmate::assert_numeric(coefs_init, finite = TRUE, any.missing = FALSE, len = ncol(design), null.ok = TRUE)
 
   #Initial values for the parameters
-  coefs_init <- runif(ncol(design), min = -3, max = 3)
+  if (is.null(coefs_init)) {
+   coefs_init <- runif(ncol(design), min = -3, max = 3)
+  }
 
   optim_res <- optim(coefs_init, neg_loglik, neg_loglik_deriv, design = design,
                      response = response, ...)
+
+  converged <- optim_res$convergence == 0
+  if (!converged) {
+    warning("The optimization algorithm for the fitting procedure did not converge!")
+  }
 
   coefs_fitted <- optim_res$par
   response_fitted <- 1 / (1 + exp(design %*% coefs_fitted))
@@ -24,15 +37,3 @@ fit_logitreg <- function(design, response, ...){
 }
 
 
-# data <- sim_data(seed = 123, numerics = 1)
-# str(data)
-#
-# res <- fit_logitreg(data$design, data$response)
-# str(res)
-#
-#
-# ?glm
-#
-#
-# model <- glm(response ~ 0 + design, family = binomial(link = 'logit'), data = data)
-# model
