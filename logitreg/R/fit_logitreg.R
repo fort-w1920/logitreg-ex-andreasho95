@@ -16,6 +16,11 @@ fit_logitreg <- function(design, response, coefs_init = NULL, ...){
   checkmate::assert_numeric(response, finite = TRUE, any.missing = FALSE, len = nrow(design))
   checkmate::assert_numeric(coefs_init, finite = TRUE, any.missing = FALSE, len = ncol(design), null.ok = TRUE)
 
+  respose_values <- unique(response)
+  if (!all(respose_values %in% c(0,1))) {
+    stop("The values for the response must be 0 or 1!")
+  }
+
   #Initial values for the parameters
   if (is.null(coefs_init)) {
    coefs_init <- runif(ncol(design), min = -3, max = 3)
