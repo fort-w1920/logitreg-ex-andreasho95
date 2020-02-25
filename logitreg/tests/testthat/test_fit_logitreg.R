@@ -25,3 +25,5 @@ test_that("Returning warning message when optimization algorithm did not converv
 })
 
 # Checks for perfect linear separability
+# Checks that response is between 0,1
+

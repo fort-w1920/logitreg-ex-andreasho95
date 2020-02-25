@@ -49,7 +49,6 @@ sim_data <- function(n = 1500, numerics = 3, factors = 0, seed = NULL, dataframe
 #' Logistic Distribution Function
 #'
 #' Calculates the values of the logistic distribution function for given observations.
-#' It is assumed that the data follow a distribution function that has location and scale values of 0.
 #'
 #' @param x Numeric vector containing the observations.
 #'
@@ -61,15 +60,14 @@ logistic <- function(x) plogis(x)
 #'
 #' Calculates the value of the logistic distribution or its gradient given the coefficients, design
 #' matrix and the response vector.
-#' It is assumed that the data follow a distribution function that has location and scale values of 0.
 #'
 #' @details
 #' Given the coefficients, the design matrix and the response vector, neg_loglik and neg_loglik_deriv
 #' calculate the negative log-likelihood and its gradient, respectively.
 #'
 #' @param coefs Numeric vector containing the coefficients for the logistic regression.
-#' @param design Numeric matrix containing the (scaled) design matrix.
-#' @param response Numeric vector containing the (scaled) response.
+#' @param design Numeric matrix containing the design matrix.
+#' @param response Numeric vector containing the response.
 #' @return Numeric vector containing the values of the distribution function for the given observations.
 neg_loglik <- function(coefs, design, response) {
   probabilities <- logistic(design %*% coefs)

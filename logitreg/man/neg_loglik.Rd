@@ -12,9 +12,9 @@ neg_loglik_deriv(coefs, design, response)
 \arguments{
 \item{coefs}{Numeric vector containing the coefficients for the logistic regression.}
 
-\item{design}{Numeric matrix containing the (scaled) design matrix.}
+\item{design}{Numeric matrix containing the design matrix.}
 
-\item{response}{Numeric vector containing the (scaled) response.}
+\item{response}{Numeric vector containing the response.}
 }
 \value{
 Numeric vector containing the values of the distribution function for the given observations.
@@ -22,7 +22,6 @@ Numeric vector containing the values of the distribution function for the given 
 \description{
 Calculates the value of the logistic distribution or its gradient given the coefficients, design
 matrix and the response vector.
-It is assumed that the data follow a distribution function that has location and scale values of 0.
 }
 \details{
 Given the coefficients, the design matrix and the response vector, neg_loglik and neg_loglik_deriv

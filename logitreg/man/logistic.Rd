@@ -14,5 +14,4 @@ Numeric vector containing the values of the distribution function for the given 
 }
 \description{
 Calculates the values of the logistic distribution function for given observations.
-It is assumed that the data follow a distribution function that has location and scale values of 0.
 }

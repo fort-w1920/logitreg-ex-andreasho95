@@ -7,9 +7,9 @@
 fit_logitreg(design, response, coefs_init = NULL, ...)
 }
 \arguments{
-\item{design}{Numeric matrix containing the (scaled) design matrix.}
+\item{design}{Numeric matrix containing the design matrix.}
 
-\item{response}{Numeric vector containing the (scaled) response.}
+\item{response}{Numeric vector containing the response.}
 
 \item{coefs_init}{Numeric vector containing initial coefficientsfor the optimization.
 If `NULL` then the coefficients are drawn out of a uniform distribution over the intervall [-3, 3]}
