@@ -29,6 +29,8 @@ logitreg.formula <- function(design, response, coefs_init = NULL, ...) {
   structure(res, class = "logitreg")
 }
 
+# Methods ------------------------------------------------------------------------------------------
+
 #' Method `predict` for class `logitreg`
 #'
 #' Obtains predictions for new data from fitted logistic regression model object.
@@ -71,4 +73,9 @@ predict.logitreg <- function(object, newdata = NULL, ...) {
 
   predicted <- 1 / (1 + exp(newdata %*% object$coefficients))
   as.vector(predicted)
+}
+
+#' @export
+fitted.logitreg <- function(object, ...) {
+  as.vector(object$fitted)
 }

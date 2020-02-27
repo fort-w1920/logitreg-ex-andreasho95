@@ -51,3 +51,10 @@ test_that("predict.logitreg method gives meaningful error message if new_data ca
   expect_error(predict(res_logitreg_default, iris[,c(4,5)]),
                "numeric matrix")
 })
+
+context("S3 Class logitreg methods")
+test_that("fitted.logitreg method works correctly", {
+  fitted_values <- fitted(res_logitreg_default)
+  expect_true(is.vector(fitted_values))
+  expect_identical(fitted_values, as.vector(res_logitreg_default$fitted))
+})
