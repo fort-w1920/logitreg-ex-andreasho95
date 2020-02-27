@@ -2,6 +2,10 @@
 
 S3method(logitreg,default)
 S3method(logitreg,formula)
+S3method(predict,logitreg)
 export(logitreg)
 export(sim_data)
 import(stats)
+importFrom(checkmate,assert_data_frame)
+importFrom(checkmate,assert_true)
+importFrom(stats,predict)
