@@ -41,8 +41,6 @@ logitreg.formula <- function(design, response, coefs_init = NULL, ...) {
 #' @param ...        further arguments passed to or from other methods.
 #'
 #' @return a vector of predictions.
-#' @importFrom       checkmate assert_data_frame assert_true
-#' @importFrom       stats predict
 #' @export
 predict.logitreg <- function(object, newdata = NULL, ...) {
   if (is.null(newdata)) {
@@ -79,3 +77,22 @@ predict.logitreg <- function(object, newdata = NULL, ...) {
 fitted.logitreg <- function(object, ...) {
   as.vector(object$fitted)
 }
+
+#' Method `plot` for class `logitreg`
+#'
+#' Obtains ROC-curve plot for objects of class `logitreg`
+#'
+#' @param x     object of class `logitreg`.
+#' @param ...   additional arguments for plot function
+#' @importFrom graphics plot
+#'
+#' @export
+plot.logitreg <- function(x, ...) {
+  labels <- x$data[, ncol(x$data)]
+  predictions <- x$fitted
+  pred_ROCR <- ROCR::prediction(predictions, labels)
+  performace_ROCR <- ROCR::performance(pred_ROCR, "sens", "fpr")
+  # plot(performace_ROCR, ...)
+}
+
+
